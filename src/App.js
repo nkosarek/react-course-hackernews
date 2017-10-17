@@ -33,7 +33,7 @@ class App extends Component {
     this.state = {
       list,
       searchTerm: '',
-      user: {first: "Jerry", last: "Smith"},
+      user: {firstname: "Jerry", lastname: "Smith"},
     };
 
     this.onSearchChange = this.onSearchChange.bind(this);
@@ -51,11 +51,14 @@ class App extends Component {
   }
 
   render() {
+    const { searchTerm, list, user } = this.state;
+    const { firstname, lastname } = user;
+
     return (
       <div className="App">
         <h2>{helloWorld}</h2>
 
-        <h3>Hi, {this.state.user.first} {this.state.user.last}</h3>
+        <h3>Hi, {firstname} {lastname}</h3>
 
         <form>
           <input
@@ -64,7 +67,7 @@ class App extends Component {
           />
         </form>
 
-        { this.state.list.filter(isSearched(this.state.searchTerm)).map(item =>
+        { list.filter(isSearched(searchTerm)).map(item =>
           <div key={item.objectID}>
             <span>
               <a href={item.url}>{item.title}</a>
