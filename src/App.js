@@ -20,10 +20,11 @@ const list = [
   },
 ];
 
-const helloWorld = "Welcome to the Road to learn React";
+const welcome = "Welcome to the Road to learn React";
 
 const isSearched = (searchTerm) => (item) =>
   item.title.toLowerCase().includes(searchTerm.toLowerCase());
+
 
 class App extends Component {
 
@@ -56,19 +57,46 @@ class App extends Component {
 
     return (
       <div className="App">
-        <h2>{helloWorld}</h2>
+        <h2>{welcome}</h2>
 
         <h3>Hi, {firstname} {lastname}</h3>
 
-        <form>
-          <input
-            type="text"
-            value={searchTerm}
-            onChange={this.onSearchChange}
-          />
-        </form>
+        <Search
+          value={searchTerm}
+          onChange={this.onSearchChange}
+        />
 
-        { list.filter(isSearched(searchTerm)).map(item =>
+        <Table
+          list={list}
+          pattern={searchTerm}
+          onDismiss={this.onDismiss}
+        />
+      </div>
+    );
+  }
+}
+
+class Search extends Component {
+  render() {
+    const { value, onChange } = this.props;
+    return (
+      <form>
+        <input
+          type="text"
+          value={value}
+          onChange={onChange}
+        />
+      </form>
+    );
+  }
+}
+
+class Table extends Component {
+  render() {
+    const { list, pattern, onDismiss } = this.props;
+    return (
+      <div>
+        { list.filter(isSearched(pattern)).map(item =>
           <div key={item.objectID}>
             <span>
               <a href={item.url}>{item.title}</a>
@@ -78,7 +106,7 @@ class App extends Component {
             <span>{item.points}</span>
             <span>
               <button
-                onClick={() => this.onDismiss(item.objectID)}
+                onClick={() => onDismiss(item.objectID)}
                 type="button"
               >
                 Dismiss
