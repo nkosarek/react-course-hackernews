@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import './App.css';
 
+const DEFAULT_QUERY = 'redux';
+
+const PATH_BASE = 'https://hn.algolia.com/api/v1';
+const PATH_SEARCH = '/search';
+const PARAM_SEARCH = 'query=';
+
 const list = [
   {
     title: 'React',
@@ -20,7 +26,7 @@ const list = [
   },
 ];
 
-const welcome = "Welcome to the Road to learn React";
+const WELCOME = "Welcome to the Road to learn React";
 
 const largeColumn = {
   width: '40%',
@@ -44,13 +50,31 @@ class App extends Component {
     super(props);
 
     this.state = {
-      list,
-      searchTerm: '',
+      result: null,
+      searchTerm: DEFAULT_QUERY,
       user: {firstname: "Jerry", lastname: "Smith"},
     };
 
+    this.setSearchTopStories = this.setSearchTopStories.bind(this);
+    this.fetchSearchTopStories = this.fetchSearchTopStories.bind(this);
     this.onSearchChange = this.onSearchChange.bind(this);
     this.onDismiss = this.onDismiss.bind(this);
+  }
+
+  setSearchTopStories(result) {
+    this.setState({ result });
+  }
+
+  fetchSearchTopStories(searchTerm) {
+    fetch(`${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchTerm}`)
+      .then(response => response.json())
+      .then(result => this.setSearchTopStories(result))
+      .catch(e => e);
+  }
+
+  componentDidMount() {
+    const { searchTerm } = this.state;
+    this.fetchSearchTopStories(searchTerm);
   }
 
   onSearchChange(event) {
@@ -64,12 +88,14 @@ class App extends Component {
   }
 
   render() {
-    const { searchTerm, list, user } = this.state;
+    const { searchTerm, result, user } = this.state;
     const { firstname, lastname } = user;
+
+    if (!result) { return null; }
 
     return (
       <div className="page">
-        <h2>{welcome}</h2>
+        <h2>{WELCOME}</h2>
 
         <h3>Hi, {firstname} {lastname}</h3>
 
@@ -82,7 +108,7 @@ class App extends Component {
           </Search>
 
           <Table
-            list={list}
+            list={result.hits}
             pattern={searchTerm}
             onDismiss={this.onDismiss}
           />
