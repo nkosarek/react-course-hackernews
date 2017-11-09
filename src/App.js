@@ -93,8 +93,6 @@ class App extends Component {
     const { searchTerm, result, user } = this.state;
     const { firstname, lastname } = user;
 
-    if (!result) { return null; }
-
     return (
       <div className="page">
         <h2>{WELCOME}</h2>
@@ -109,11 +107,13 @@ class App extends Component {
             Search
           </Search>
 
+        { result &&
           <Table
             list={result.hits}
             pattern={searchTerm}
             onDismiss={this.onDismiss}
           />
+        }
         </div>
       </div>
     );
