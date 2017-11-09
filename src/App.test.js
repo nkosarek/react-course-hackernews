@@ -28,12 +28,17 @@ describe('Search', () => {
 
   it('renders', () => {
     const div = document.createElement('div');
-    ReactDOM.render(<Search>Search</Search>, div);
+    ReactDOM.render(<Search onChange={() => null} onSubmit={() => null}>
+                      Search
+                    </Search>,
+                    div);
   });
 
   test('snapshots', () => {
     const component = renderer.create(
-      <Search>Search</Search>
+      <Search onChange={() => null} onSubmit={() => null}>
+        Search
+      </Search>
     );
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
@@ -44,12 +49,12 @@ describe('Search', () => {
 describe('Button', () => {
   it('renders', () => {
     const div = document.createElement('div');
-    ReactDOM.render(<Button>Give Me More</Button>, div);
+    ReactDOM.render(<Button onClick={() => null}>Give Me More</Button>, div);
   });
 
   test('snapshots', () => {
     const component = renderer.create(
-      <Button>Give Me More</Button>
+      <Button onClick={() => null}>Give Me More</Button>
     );
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
@@ -63,6 +68,7 @@ describe('Table', () => {
       { title: '1', author: '1', num_comments: 1, points: 2, objectID: 'y' },
       { title: '2', author: '2', num_comments: 1, points: 2, objectID: 'z' },
     ],
+    onDismiss: (() => null),
   };
 
   it('renders', () => {
