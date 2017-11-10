@@ -37,13 +37,11 @@ exports[`App snapshots 1`] = `
   <div
     className="interactions"
   >
-    <button
-      className=""
-      onClick={[Function]}
-      type="button"
-    >
-      More
-    </button>
+    <div>
+      <i
+        className="fa fa-spinner fa-pulse fa-2x"
+      />
+    </div>
   </div>
 </div>
 `;

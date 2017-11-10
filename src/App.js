@@ -38,6 +38,7 @@ class App extends Component {
       searchTerm: DEFAULT_QUERY,
       user: {firstname: "Jerry", lastname: "Smith"},
       error: null,
+      isLoading: false,
     };
 
     this.needsToSearchTopStories = this.needsToSearchTopStories.bind(this);
@@ -69,11 +70,14 @@ class App extends Component {
       results: {
         ...results,
         [searchKey]: { hits: updatedHits, page }
-      }
+      },
+      isLoading: false
     });
   }
 
   fetchSearchTopStories(searchTerm, page = 0) {
+    this.setState({ isLoading: true });
+
     fetch(`${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchTerm}&${PARAM_PAGE}${page}&${PARAM_HPP}${DEFAULT_HPP}`)
       .then(response => response.json())
       .then(result => this.setSearchTopStories(result))
@@ -121,7 +125,8 @@ class App extends Component {
       results,
       searchKey, 
       user,
-      error
+      error,
+      isLoading
     } = this.state;
 
     const { firstname, lastname } = user;
@@ -165,9 +170,14 @@ class App extends Component {
         }
 
         <div className="interactions">
-          <Button onClick={() => this.fetchSearchTopStories(searchKey, page + 1)}>
-            More
-          </Button>
+          { isLoading
+            ? <Loading />
+            : <Button
+                onClick={() => this.fetchSearchTopStories(searchKey, page + 1)}
+              >
+                More
+              </Button>
+          }
         </div>
       </div>
     );
@@ -242,6 +252,9 @@ Table.propTypes = {
   ).isRequired,
   onDismiss: PropTypes.func.isRequired,
 };
+
+const Loading = () =>
+  <div><i className="fa fa-spinner fa-pulse fa-2x" /></div>
 
 const Button = ({ onClick, className, children }) =>
   <button
