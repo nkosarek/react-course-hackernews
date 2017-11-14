@@ -81,7 +81,7 @@ class App extends Component {
     fetch(`${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchTerm}&${PARAM_PAGE}${page}&${PARAM_HPP}${DEFAULT_HPP}`)
       .then(response => response.json())
       .then(result => this.setSearchTopStories(result))
-      .catch(e => this.setState({ error: e }));
+      .catch(e => this.setState({ error: e, isLoading: false }));
   }
 
   componentDidMount() {
@@ -159,30 +159,25 @@ class App extends Component {
           </Search>
         </div>
 
-        { error 
-          ? <div className="interactions">
-              <p>Something went wrong.</p>
-            </div>
-          : <Table
-              list={list}
-              onDismiss={this.onDismiss}
-            />
-        }
+        <TableWithError
+          error={error}
+          list={list}
+          onDismiss={this.onDismiss}
+        />
 
         <div className="interactions">
-          { isLoading
-            ? <Loading />
-            : <Button
-                onClick={() => this.fetchSearchTopStories(searchKey, page + 1)}
-              >
-                More
-              </Button>
-          }
+          <ButtonWithLoading
+            isLoading={isLoading}
+            onClick={() => this.fetchSearchTopStories(searchKey, page + 1)}
+          >
+            More
+          </ButtonWithLoading>
         </div>
       </div>
     );
   }
 }
+
 
 const Search = ({
   value,
@@ -253,8 +248,14 @@ Table.propTypes = {
   onDismiss: PropTypes.func.isRequired,
 };
 
-const Loading = () =>
-  <div><i className="fa fa-spinner fa-pulse fa-2x" /></div>
+const withError = (Component) => ({ error, ...rest }) =>
+  error
+    ? <div className="interactions">
+        <p>Something went wrong.</p>
+      </div>
+    : <Component { ...rest } />
+
+const TableWithError = withError(Table);
 
 const Button = ({ onClick, className, children }) =>
   <button
@@ -274,6 +275,17 @@ Button.propTypes = {
   className: PropTypes.string,
   children: PropTypes.node.isRequired,
 };
+
+const Loading = () =>
+  <div><i className="fa fa-spinner fa-pulse fa-2x" /></div>
+
+const withLoading = (Component) => ({ isLoading, ...rest }) =>
+  isLoading
+    ? <Loading />
+    : <Component { ...rest } />
+
+const ButtonWithLoading = withLoading(Button);
+
 
 export default App;
 
