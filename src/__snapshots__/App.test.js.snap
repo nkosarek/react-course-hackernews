@@ -33,7 +33,109 @@ exports[`App snapshots 1`] = `
   </div>
   <div
     className="table"
-  />
+  >
+    <div
+      className="table-header"
+    >
+      <span
+        style={
+          Object {
+            "width": "40%",
+          }
+        }
+      >
+        <div
+          className="sort-direction"
+        >
+          <span>
+            <button
+              className="button-inline"
+              onClick={[Function]}
+              type="button"
+            >
+              Title
+            </button>
+          </span>
+          <span />
+        </div>
+      </span>
+      <span
+        style={
+          Object {
+            "width": "30%",
+          }
+        }
+      >
+        <div
+          className="sort-direction"
+        >
+          <span>
+            <button
+              className="button-inline"
+              onClick={[Function]}
+              type="button"
+            >
+              Author
+            </button>
+          </span>
+          <span />
+        </div>
+      </span>
+      <span
+        style={
+          Object {
+            "width": "10%",
+          }
+        }
+      >
+        <div
+          className="sort-direction"
+        >
+          <span>
+            <button
+              className="button-inline"
+              onClick={[Function]}
+              type="button"
+            >
+              Comments
+            </button>
+          </span>
+          <span />
+        </div>
+      </span>
+      <span
+        style={
+          Object {
+            "width": "10%",
+          }
+        }
+      >
+        <div
+          className="sort-direction"
+        >
+          <span>
+            <button
+              className="button-inline"
+              onClick={[Function]}
+              type="button"
+            >
+              Points
+            </button>
+          </span>
+          <span />
+        </div>
+      </span>
+      <span
+        style={
+          Object {
+            "width": "10%",
+          }
+        }
+      >
+        Archive
+      </span>
+    </div>
+  </div>
   <div
     className="interactions"
   >
@@ -77,6 +179,111 @@ exports[`Table snapshots 1`] = `
 <div
   className="table"
 >
+  <div
+    className="table-header"
+  >
+    <span
+      style={
+        Object {
+          "width": "40%",
+        }
+      }
+    >
+      <div
+        className="sort-direction"
+      >
+        <span>
+          <button
+            className="button-inline button-active"
+            onClick={[Function]}
+            type="button"
+          >
+            Title
+          </button>
+        </span>
+        <span>
+          <i
+            className="fa fa-angle-up"
+          />
+        </span>
+      </div>
+    </span>
+    <span
+      style={
+        Object {
+          "width": "30%",
+        }
+      }
+    >
+      <div
+        className="sort-direction"
+      >
+        <span>
+          <button
+            className="button-inline"
+            onClick={[Function]}
+            type="button"
+          >
+            Author
+          </button>
+        </span>
+        <span />
+      </div>
+    </span>
+    <span
+      style={
+        Object {
+          "width": "10%",
+        }
+      }
+    >
+      <div
+        className="sort-direction"
+      >
+        <span>
+          <button
+            className="button-inline"
+            onClick={[Function]}
+            type="button"
+          >
+            Comments
+          </button>
+        </span>
+        <span />
+      </div>
+    </span>
+    <span
+      style={
+        Object {
+          "width": "10%",
+        }
+      }
+    >
+      <div
+        className="sort-direction"
+      >
+        <span>
+          <button
+            className="button-inline"
+            onClick={[Function]}
+            type="button"
+          >
+            Points
+          </button>
+        </span>
+        <span />
+      </div>
+    </span>
+    <span
+      style={
+        Object {
+          "width": "10%",
+        }
+      }
+    >
+      Archive
+    </span>
+  </div>
   <div
     className="table-row"
   >
