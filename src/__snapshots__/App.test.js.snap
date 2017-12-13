@@ -194,18 +194,14 @@ exports[`Table snapshots 1`] = `
       >
         <span>
           <button
-            className="button-inline button-active"
+            className="button-inline"
             onClick={[Function]}
             type="button"
           >
             Title
           </button>
         </span>
-        <span>
-          <i
-            className="fa fa-angle-up"
-          />
-        </span>
+        <span />
       </div>
     </span>
     <span

@@ -117,7 +117,6 @@ class App extends Component {
     this.setState({ searchTerm: event.target.value });
   }
 
-  //TODO?: Refactor setState to use a function
   onSearchSubmit(event) {
     const { searchTerm } = this.state;
     this.setState({ searchKey: searchTerm })
@@ -132,7 +131,6 @@ class App extends Component {
     this.setState(updateOnDismissState(id));
   }
 
-  //TODO?: Refactor setState to use a function
   componentDidMount() {
     const { searchTerm } = this.state;
     this.setState({ searchKey: searchTerm })
@@ -354,9 +352,6 @@ Table.propTypes = {
       points: PropTypes.number,
     })
   ).isRequired,
-  sortKey: PropTypes.string.isRequired,
-  isSortReverse: PropTypes.bool.isRequired,
-  onSort: PropTypes.func.isRequired,
   onDismiss: PropTypes.func.isRequired,
 };
 
